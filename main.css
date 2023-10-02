@@ -1,0 +1,29 @@
+#container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px;
+
+}
+
+#button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+}
+
+input[type="file"]{
+    display: none;
+
+}
