@@ -12,7 +12,7 @@ upload_button.addEventListener('change', function(e) {
     // On load, store the data as text on the page
     // There's probably a better way to do this!
     reader.onload = function() {
-        input_data.innerText = reader.result
+        input_data.textContent = reader.result.replace(/\n/g, ',')
         upload_button.hidden = true
         analyse_button.hidden = false   
     }
