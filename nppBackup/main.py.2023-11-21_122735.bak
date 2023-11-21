@@ -7,7 +7,7 @@ import pyscript as ps
 def read_file_from_string(string: str):
     # Might need to change this depending on the file format
     # Remember it's coming from a string so newlines have already been replaced!
-    return np.array(string[10:-1], dtype=np.float32)
+    return np.array(string[:-1], dtype=np.float32)
 
 def do_one_thing(ecg_bit,run, SI, species):
 	ecg_bit = read_file_from_string(ecg_bit)
@@ -43,7 +43,7 @@ def do_thing():
 	
 	data = ps.Element("Sample_Interval")
 	ps.display(type(data), target="mpl")
-	si = int(data.value)
+	si = data.value
 	
 	ps.display(f"ecg length {len(ecg)}", target="mpl")
 	ps.display(f"species {species}", target="mpl")

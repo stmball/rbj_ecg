@@ -7,7 +7,7 @@ import pyscript as ps
 def read_file_from_string(string: str):
     # Might need to change this depending on the file format
     # Remember it's coming from a string so newlines have already been replaced!
-    return np.array(string[10:-1], dtype=np.float32)
+    return np.array(string[:-1], dtype=np.float32)
 
 def do_one_thing(ecg_bit,run, SI, species):
 	ecg_bit = read_file_from_string(ecg_bit)
@@ -37,6 +37,7 @@ def do_thing():
 	masterdf = pd.DataFrame(data={"peaks": [0]})
 	data = ps.Element("input_data")
 	ecg = data.element.textContent.split(",")
+	ecg = ecg[2:]
 	
 	data = ps.Element("Species")
 	species =  data.value

@@ -7,20 +7,13 @@ import pyscript as ps
 def read_file_from_string(string: str):
     # Might need to change this depending on the file format
     # Remember it's coming from a string so newlines have already been replaced!
-    return np.array(string[10:-1], dtype=np.float32)
+    return np.array(string[:-1], dtype=np.float32)
 
-def do_one_thing(ecg_bit,run, SI, species):
+def do_one_thing(ecg_bit,run):
 	ecg_bit = read_file_from_string(ecg_bit)
-	if species == "rat":
-		factor = 7
-	elif species == "mouse":
-		factor = 8
-	else:
-		factor = 1
 	
-	signals, rpeaks = nk.ecg_process(ecg_bit, sampling_rate=SI/factor)
-	rpeaks["sampling_rate"] = SI
-	signals["ECG_Rate"]=signals["ECG_Rate"]*factor
+	signals, rpeaks = nk.ecg_process(ecg_bit, sampling_rate=128)
+	rpeaks["sampling_rate"] = 1000
 	if run==0:
 		nk.ecg_plot(signals, rpeaks)
 		plt.tight_layout()
@@ -36,19 +29,9 @@ def do_thing():
 	size = 10000
 	masterdf = pd.DataFrame(data={"peaks": [0]})
 	data = ps.Element("input_data")
+	si = ps.Element("si")
 	ecg = data.element.textContent.split(",")
-	
-	data = ps.Element("Species")
-	species =  data.value
-	
-	data = ps.Element("Sample_Interval")
-	ps.display(type(data), target="mpl")
-	si = int(data.value)
-	
 	ps.display(f"ecg length {len(ecg)}", target="mpl")
-	ps.display(f"species {species}", target="mpl")
-	ps.display(f"Sample Interval {si}", target="mpl")
-	
 	#It will likely be too long for one bite
 	#Try "size" numbers
 	loops = len(ecg)//size
@@ -56,7 +39,7 @@ def do_thing():
 		last = i * size + size
 		if last > len(ecg):
 			last = len(ecg)
-		chunk = do_one_thing(ecg[i*size:last],i, si, species)
+		chunk = do_one_thing(ecg[i*size:last],i)
 		masterdf=pd.concat([masterdf,chunk+max(masterdf["peaks"])])
 		
 	signals_html = ps.Element("signals")

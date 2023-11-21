@@ -2,8 +2,6 @@
 upload_button = document.querySelector('#upload_data');
 input_data = document.querySelector('#input_data');
 analyse_button = document.querySelector('#analyse_button');
-Sample_Interval = document.querySelector('#Sample_Interval');
-Species = document.querySelector('#Species');
 
 upload_button.addEventListener('change', function(e) {
 

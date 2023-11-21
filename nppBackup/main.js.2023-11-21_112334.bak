@@ -17,6 +17,13 @@ upload_button.addEventListener('change', function(e) {
         input_data.textContent = reader.result.replace(/\n/g, ',')
         upload_button.hidden = true
         analyse_button.hidden = false   
+		
+		// Read the value of Sample_Interval and species
+        var si = Sample_Interval.value;
+		var mySpecies = species.value;
+		
+        console.log("Sample Interval: " + si);
+		
     }
     reader.onerror = function() {
         console.error(reader.error)

@@ -2,8 +2,7 @@
 upload_button = document.querySelector('#upload_data');
 input_data = document.querySelector('#input_data');
 analyse_button = document.querySelector('#analyse_button');
-Sample_Interval = document.querySelector('#Sample_Interval');
-Species = document.querySelector('#Species');
+Sample_Interval = = document.querySelector('#Sample_Interval');
 
 upload_button.addEventListener('change', function(e) {
 
@@ -17,6 +16,11 @@ upload_button.addEventListener('change', function(e) {
         input_data.textContent = reader.result.replace(/\n/g, ',')
         upload_button.hidden = true
         analyse_button.hidden = false   
+		
+		// Read the value of Sample_Interval
+        var si = Sample_Interval.value;
+        console.log("Sample Interval: " + si);
+		
     }
     reader.onerror = function() {
         console.error(reader.error)
