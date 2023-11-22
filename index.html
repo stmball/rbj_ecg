@@ -43,10 +43,8 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
-						<th><p>Analyse</p></th>
-						<th><button id="analyse_button" type="button" class="btn btn-success" hidden py-click="do_thing()">Analyse Data</button></th>
-						</td>
+						<td><th><p>Analyse</p></th>
+						<th><button id="analyse_button" type="button" class="btn btn-success" hidden py-click="runpy()">Analyse Data</button></th></td>
 					</tr>
 					<tr>
 						<td>
@@ -89,6 +87,19 @@
         </py-config>
         <script type="py" src="./main.py"></script>
         <script src="./main.js"></script>
+		<py-script>
+			import pyscript
+
+			# Import do_thing from main.py
+			processingButton = pyscript.Element("processing")
+
+			def runpy():
+				processingButton.hidden = False 
+				do_thing()
+				processingButton.hidden = True
+
+			</py-script>
+
     </body>
 
 </html>
