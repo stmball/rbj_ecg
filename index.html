@@ -89,14 +89,20 @@
         <script src="./main.js"></script>
 		<py-script>
 			import pyscript
+			import time
+			import js
 
-			# Import do_thing from main.py
-			processingButton = pyscript.Element("processing")
-
+			
+			
 			def runpy():
-				processingButton.hidden = False 
+				pbutton = js.document.getElementById("processing")
+				abutton = js.document.getElementById("analyse_button")
+
+				"""time.sleep(5)"""
+				pbutton.hidden = False
+				abutton.hidden = True
 				do_thing()
-				processingButton.hidden = True
+				pbutton.hidden = True
 
 			</py-script>
 
