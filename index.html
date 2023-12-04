@@ -7,6 +7,8 @@
         <script defer src="https://pyscript.net/latest/pyscript.js"></script> 
 
     </head>
+
+	
     <body>
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
@@ -20,7 +22,7 @@
             </div>
             <div>
                 <h1 class="display-4">Data</h1>
-                <div id="signals"></div>
+                <div id="signals"></div>++
             </div>
 			<div class="Input">
 			 <table id="InputTable">
@@ -42,28 +44,19 @@
 						<th> <label id="upload_button" type="button" class="btn btn-secondary" >Upload Data<input type="file"></label> </th>
 						</td>
 					</tr>
-					<tr>
-						<td><th><p>Analyse</p></th>
+					<tr><td><th><p>Analyse</p></th>
 						<th><button id="analyse_button" type="button" class="btn btn-success" hidden py-click="runpy()">Analyse Data</button></th></td>
 					</tr>
 					<tr>
-						<td>
-						<th><p>Processing</p></th>
-						<th><button id="processing" type="button" class="btn btn-danger" hidden>PROCESSING!</button></th>
-						</td>						
+						<td><th><p>Processing</p></th>
+						<th><button id="processing" type="button" class="btn btn-danger" hidden>PROCESSING!</button></th></td>						
 					</tr>	
 					</tr>
-					<tr>
-						<td>
-						<th><p>Download</p></th>
-						<th><button id="download_data" type="button" class="btn btn-primary" hidden>Download Data</button></th>
-						</td>
+					<tr><td><th><p>Download</p></th>
+						<th><button id="download_data" type="button" class="btn btn-primary" hidden>Download Data</button></th></td>
 					</tr>
-					
-					
 				</tbody>
-			</table>
-				
+			</table>				
 			</div>				
         </div>
         <div id="input_data" hidden></div>
@@ -91,9 +84,7 @@
 			import pyscript
 			import time
 			import js
-
-			
-			
+	
 			def runpy():
 				pbutton = js.document.getElementById("processing")
 				abutton = js.document.getElementById("analyse_button")
@@ -104,7 +95,7 @@
 				do_thing()
 				pbutton.hidden = True
 
-			</py-script>
+		</py-script>
 
     </body>
 
