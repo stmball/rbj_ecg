@@ -15,23 +15,24 @@ def read_file_from_string(string: str, loop: int):
 
 def do_one_thing(ecg_bit, loop, SI, species):
 	ecg_bit = read_file_from_string(ecg_bit, loop)
+	factor = 1.0
 	if species == "rat":
-		factor = 7
+		factor = 7.0
 	elif species == "mouse":
-		factor = 8
-	else:
-		factor = 1
-	
-	signals, rpeaks = nk.ecg_process(ecg_bit, sampling_rate=SI/factor)
-	rpeaks["sampling_rate"] = SI
-	signals["ECG_Rate"]=signals["ECG_Rate"]*factor
-	if loop==0:
-		nk.ecg_plot(signals, rpeaks)
-		plt.tight_layout()
-		fig1 = plt.gcf()
-		fig1.set_size_inches(15, 10, forward=True) 
-		ps.display(fig1, target="mpl")
-	df = pd.DataFrame(data={"peaks": rpeaks["ECG_R_Peaks"]})
+		factor = 8.0
+	try: 	
+		signals, rpeaks = nk.ecg_process(ecg_bit, sampling_rate=int(SI/factor))
+		rpeaks["sampling_rate"] = SI
+		signals["ECG_Rate"]=signals["ECG_Rate"]*factor
+		if loop==0:
+			nk.ecg_plot(signals, rpeaks)
+			plt.tight_layout()
+			fig1 = plt.gcf()
+			fig1.set_size_inches(15, 10, forward=True) 
+			ps.display(fig1, target="mpl")
+		df = pd.DataFrame(data={"peaks": rpeaks["ECG_R_Peaks"]})
+	except:
+		df = pd.DataFrame(data={"peaks": [0]})
 	return df
 	
 
