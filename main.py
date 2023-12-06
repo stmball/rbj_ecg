@@ -16,10 +16,12 @@ def read_file_from_string(string: str, loop: int):
 def do_one_thing(ecg_bit, loop, SI, species):
 	ecg_bit = read_file_from_string(ecg_bit, loop)
 	factor = 1.0
-	if species == "rat":
+	if species.lower() == "rat":
 		factor = 7.0
-	elif species == "mouse":
+	elif species.lower() == "mouse":
 		factor = 8.0
+	elif species.lower() == "rabbit":
+		factor = 3.0
 	try: 	
 		signals, rpeaks = nk.ecg_process(ecg_bit, sampling_rate=int(SI/factor))
 		rpeaks["sampling_rate"] = SI
