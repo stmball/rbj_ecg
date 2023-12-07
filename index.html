@@ -5,7 +5,10 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script defer src="https://pyscript.net/latest/pyscript.js"></script> 
+
     </head>
+
+	
     <body>
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
@@ -18,22 +21,82 @@
                 <div id="mpl"></div>
             </div>
             <div>
-                <h1 class="display-4">Output Data</h1>
-                <div id="signals"></div>
+                <h1 class="display-4">Data</h1>
+                <div id="signals"></div>++
             </div>
-            <div id="button-container">
-                <label id="upload_data" type="button" class="btn btn-secondary" >Upload Data<input type="file"></label>
-                <button id="analyse_button" type="button" class="btn btn-success" hidden py-click="do_thing()">Analyse Data</button>
-                <button id="download_data" type="button" class="btn btn-primary" hidden>Download Data</button>
-            </div>
+			<div class="Input">
+			 <table id="InputTable">
+				<tr></tr>
+				<tr>
+				<th><p>Sample rate</p></th>
+				<th><p>Species</p></th>
+				</tr>
+				<th><input id="Sample_Interval" type="number" step="1" value="1000"></th>
+				<th><input id="Species" type="text" value="rat"></th>
+				<tr></tr>
+				</table>
+			<table id="button-container">
+				<tbody>
+					<tr></tr>
+					<tr>
+					<td>
+						<th><p>Upload</p></th>
+						<th> <label id="upload_button" type="button" class="btn btn-secondary" >Upload Data<input type="file"></label> </th>
+						</td>
+					</tr>
+					<tr><td><th><p>Analyse</p></th>
+						<th><button id="analyse_button" type="button" class="btn btn-success" hidden py-click="runpy()">Analyse Data</button></th></td>
+					</tr>
+					<tr>
+						<td><th><p>Processing</p></th>
+						<th><button id="processing" type="button" class="btn btn-danger" hidden>PROCESSING!</button></th></td>						
+					</tr>	
+					</tr>
+					<tr><td><th><p>Download</p></th>
+						<th><button id="download_data" type="button" class="btn btn-primary" hidden>Download Data</button></th></td>
+					</tr>
+				</tbody>
+			</table>				
+			</div>				
         </div>
         <div id="input_data" hidden></div>
+		<div style="width: 80%; margin: auto;">
+		<input id="filename" type="text" value="empty">
+		</div>
+		<div style="width: 80%; margin: auto;">
+				<p style="font-size: 2vw;">-Input format is critical, there must be just one column of
+				numbers which represent the ecg waveform.</p>
+				<p style="font-size: 2vw;">-The first 20 rows are cropped off
+				just incase they contained some sort of header!</p>
+				<p style="font-size: 2vw;">-Species must be lowercase!!</p>
+				<p style="font-size: 2vw;">-When it appears.. click "analyse" once and wait. There is no indication it is running!!!</p>
+				
+		</div>
+
+
         <py-config>
             packages = ["numpy", "matplotlib", "neurokit2", "requests"]
             files = ["./main.py"]
         </py-config>
         <script type="py" src="./main.py"></script>
         <script src="./main.js"></script>
+		<py-script>
+			import pyscript
+			import time
+			import js
+	
+			def runpy():
+				pbutton = js.document.getElementById("processing")
+				abutton = js.document.getElementById("analyse_button")
+
+				"""time.sleep(5)"""
+				pbutton.hidden = False
+				abutton.hidden = True
+				do_thing()
+				pbutton.hidden = True
+
+		</py-script>
+
     </body>
 
 </html>
