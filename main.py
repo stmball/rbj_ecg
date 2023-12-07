@@ -21,7 +21,7 @@ def do_one_thing(ecg_bit, loop, SI, species):
 	elif species.lower() == "mouse":
 		factor = 8.0
 	elif species.lower() == "rabbit":
-		factor = 3.0
+		factor = 5
 	try: 	
 		signals, rpeaks = nk.ecg_process(ecg_bit, sampling_rate=int(SI/factor))
 		rpeaks["sampling_rate"] = SI
